@@ -1,6 +1,6 @@
 # poor-man's-computer-use (pmcu)
 
-Drive Windows app windows from WSL2 (or natively on Windows 10) through an AI agent skill.
+Drive Windows app through an AI agent skill.
 
 ## Install
 
