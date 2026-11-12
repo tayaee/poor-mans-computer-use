@@ -74,6 +74,26 @@ function ForegroundWindows($only, $titleLike="") {
   return $out
 }
 
+function CascadeWindows($only, $titleLike="") {
+  $wins = ListWindows $only $titleLike
+  if ($wins.Count -eq 0) { return @() }
+  $wa = New-Object Win32+RECT
+  [void][Win32]::SystemParametersInfo(0x0030, 0, [ref]$wa, 0)
+  $dx = 28
+  $w = [math]::Floor(($wa.R-$wa.L)*2/3); $h = [math]::Floor(($wa.B-$wa.T)*2/3)
+  $out=@(); $i=0
+  foreach ($win in $wins) {
+    $x=$wa.L+$i*$dx; $y=$wa.T+$i*$dx
+    $hh=[IntPtr]$win.hwnd
+    [void][Win32]::ShowWindow($hh,9); Start-Sleep -Milliseconds 100
+    [void][Win32]::SetForegroundWindow($hh)
+    [void][Win32]::MoveWindow($hh,$x,$y,$w,$h,$true)
+    $out+=@{ hwnd=$win.hwnd; title=$win.title; x=$x; y=$y; w=$w; h=$h }
+    $i++
+  }
+  return $out
+}
+
 function TileWindows($only) {
   $wins = ListWindows $only ""
   if ($wins.Count -eq 0) { return @() }
@@ -136,8 +156,14 @@ try {
       Ok @{ windows=ForegroundWindows $only $titleLike }
     }
     "tile" {
-      $only=""; for ($i=1;$i -lt $Args.Count;$i++){ if($Args[$i] -eq "--only" -and $i+1 -lt $Args.Count){$only=$Args[$i+1];$i++} }
+      $only=""; $titleLike=""
+      for ($i=1;$i -lt $Args.Count;$i++){ if($Args[$i] -eq "--only" -and $i+1 -lt $Args.Count){$only=$Args[$i+1];$i++} elseif($Args[$i] -eq "--title" -and $i+1 -lt $Args.Count){$titleLike=$Args[$i+1];$i++} }
       Ok @{ tiled=TileWindows $only }
+    }
+    "cascade" {
+      $only=""; $titleLike=""
+      for ($i=1;$i -lt $Args.Count;$i++){ if($Args[$i] -eq "--only" -and $i+1 -lt $Args.Count){$only=$Args[$i+1];$i++} elseif($Args[$i] -eq "--title" -and $i+1 -lt $Args.Count){$titleLike=$Args[$i+1];$i++} }
+      Ok @{ cascaded=CascadeWindows $only $titleLike }
     }
     "click-at" {
       $only=""; $rx=0.5; $ry=0.9; $titleLike=""

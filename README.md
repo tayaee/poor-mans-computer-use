@@ -20,30 +20,20 @@ Requires WSL2 with `powershell.exe` interop (default) or PowerShell 5.1+. No adm
 
 ## Examples with Agent
 
-Start your coding agent in a terminal, then invoke the `/pmcu` skill.
-
-Claude Code:
+Run claude:
 
 ```bash
 % claude
 ```
 
-```text
-/pmcu From https://github.com/tayaee/poor-mans-computer-use, install the pmcu skill with install.sh, then rearrange the Chrome browsers into a tile layout.
-```
-
-pi:
-
-```bash
-% pi
-```
+Run your first prompt:
 
 ```text
-/pmcu Bring all Chrome windows to the front and tile them.
+From https://github.com/tayaee/poor-mans-computer-use, install the pmcu skill with install.sh, then tile the Chrome browsers.
 ```
+
+Run another prompt:
 
 ```text
-/pmcu Open the "Ai 인사이더 클럽" KakaoTalk chat and type '테스트' in the input box without sending.
+/pmcu Cascade the Chrome browsers.
 ```
-
-The agent runs `pmcu status` → `pmcu windows list` → acts (`foreground` / `tile` / `click-at` / `paste`) → re-reads `list` to verify, and reports back. Fixed flows can be replayed as plain shell scripts with zero tokens.
