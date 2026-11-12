@@ -1,0 +1,13 @@
+[package]
+name = "poor-mans-computer-use"
+version = "0.1.0"
+edition = "2021"
+description = "poor man's computer use: WSL2 + Windows10 Win32 via powershell interop"
+license = "MIT"
+
+[[bin]]
+name = "pmcu"
+path = "src/main.rs"
+
+[profile.release]
+strip = true

@@ -1,0 +1,19 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# Locally built release assets (built by CI on tag push)
+pmcu-linux
+pmcu-windows.exe
+pmcu-skill.zip
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Env / secrets
+.env
