@@ -8,4 +8,4 @@ if git rev-parse "v$CUR" >/dev/null 2>&1; then
     echo "[tag] v$CUR already exists" >&2; exit 1
 fi
 git tag "v$CUR"
-echo "[tag] tagged v$CUR — run ./5-push.sh to publish"
+echo "[tag] tagged v$CUR — run ./7-push.sh to publish"
