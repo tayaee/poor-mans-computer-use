@@ -1,10 +1,10 @@
 #!/bin/sh
-# 2-bump-version.sh — bump Cargo.toml and commit. Tagging is 4-tag.sh.
-# Usage: ./2-bump-version.sh --major | --minor | --patch | <x.y.z>
+# 3-bump-version.sh — bump Cargo.toml and commit. Tagging is 4-tag.sh.
+# Usage: ./3-bump-version.sh --major | --minor | --patch | <x.y.z>
 set -eu
 
 usage() {
-    echo "Usage: ./2-bump-version.sh --major | --minor | --patch | <x.y.z>" >&2
+    echo "Usage: ./3-bump-version.sh --major | --minor | --patch | <x.y.z>" >&2
     echo "  --major  0.1.0 -> 1.0.0 (breaking changes)" >&2
     echo "  --minor  0.1.0 -> 0.2.0 (new features, backwards compatible)" >&2
     echo "  --patch  0.1.0 -> 0.1.1 (bug fixes only)" >&2
