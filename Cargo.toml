@@ -1,6 +1,6 @@
 [package]
 name = "poor-mans-computer-use"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "poor man's computer use: WSL2 + Windows10 Win32 via powershell interop"
 license = "MIT"
