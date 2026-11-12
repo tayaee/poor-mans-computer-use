@@ -40,6 +40,7 @@ esac
 [ -z "$(git status --porcelain)" ] || { echo "[bump] dirty tree — commit first" >&2; exit 1; }
 sed -i "s/^version = \".*\"/version = \"$NEW\"/" Cargo.toml
 grep -q "^version = \"$NEW\"$" Cargo.toml || { echo "[bump] Cargo.toml update failed" >&2; exit 1; }
-git add Cargo.toml
+cargo generate-lockfile 2>/dev/null || cargo metadata --format-version 1 >/dev/null
+git add Cargo.toml Cargo.lock
 git commit -m "chore: bump to v$NEW"
 echo "[bump] $CUR -> $NEW committed — verify with ./3-build.sh, tag with ./4-tag.sh"
